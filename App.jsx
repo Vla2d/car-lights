@@ -1,31 +1,37 @@
-import React from 'react';
+// App.jsx
+
+import React, { useState } from 'react';
 import {
   ScrollView, Image, StyleSheet, View, TouchableOpacity, Text, StatusBar,
 } from 'react-native';
 
+import images from './images.js';
+
 export default function App() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImagePress = (index) => {
+    setSelectedImage(index);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.screenshotsContainer}>
-        <Image
-          source={require('./screenshots/cropped-image_149.png')}
-          style={styles.screenshot}
-        />
-      </View>
-
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.screenshotsContainer}>
+          <ScrollView contentContainerStyle={styles.scrollContainer} scrollEnabled={true} removeClippedSubviews={true}>
+            {images.map((source, index) => (
+              <TouchableOpacity key={index} onPress={() => handleImagePress(index)}>
+                <Image
+                  source={source}
+                  style={styles.screenshot}
+                />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+        <Text style={styles.applyText}>In order to apply your selected style, just click the image.</Text>
+      </ScrollView>
       <StatusBar hidden={false} backgroundColor="black" />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Button 1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Button 2</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Button 3</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Button 4</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -34,30 +40,31 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'black',
     flex: 1,
-    justifyContent: 'flex-start', // set to top
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  button: {
-    backgroundColor: 'blue',
-    width: 150,
-    height: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    margin: 10,
-  },
-  buttonText: {
+  applyText: {
+    marginTop: 20,
     color: 'white',
     fontWeight: 'bold',
     fontSize: 24,
+    textAlign: 'center', // Added to center the text horizontally
   },
   screenshot: {
-    flex: 1,
+    width: 300,
+    height: 250,
     resizeMode: 'contain',
   },
   screenshotsContainer: {
     width: 300,
-    height: 100,
-    marginTop: 200, // adjust as needed
+    flexGrow: 0,
+    maxHeight: 250,
+    marginTop: 50,
+    overflow: 'scroll',
+    flexDirection: 'column',
+    alignItems: 'center', // Added to center child elements horizontally
   },
 });
