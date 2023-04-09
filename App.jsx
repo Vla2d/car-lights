@@ -16,7 +16,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.scrollContainer}>
         <View style={styles.screenshotsContainer}>
           <ScrollView contentContainerStyle={styles.scrollContainer} scrollEnabled={true} removeClippedSubviews={true}>
             {images.map((source, index) => (
@@ -30,7 +30,7 @@ export default function App() {
           </ScrollView>
         </View>
         <Text style={styles.applyText}>In order to apply your selected style, just click the image.</Text>
-      </ScrollView>
+      </View>
       <StatusBar hidden={false} backgroundColor="black" />
     </View>
   );
