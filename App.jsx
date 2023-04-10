@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  ScrollView, Image, StyleSheet, View, TouchableOpacity, Text, StatusBar,
+  ScrollView, Image, View, TouchableOpacity, Text, StatusBar,
 } from 'react-native';
-
+import styles from './StyleSheet.jsx';
 import images from './images.js';
 
 export default function App() {
@@ -16,13 +16,16 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.scrollContainer}>
         <View style={styles.screenshotsContainer}>
-          <ScrollView contentContainerStyle={styles.scrollContainer} scrollEnabled={true} removeClippedSubviews={true} pagingEnabled={true}>
+          <ScrollView
+            indicatorStyle="white"
+            contentContainerStyle={styles.scrollContainer}
+            scrollEnabled={true}
+            removeClippedSubviews={true}
+            pagingEnabled={true}
+          >
             {images.map((source, index) => (
               <TouchableOpacity key={index} onPress={() => handleImagePress(index)}>
-                <Image
-                  source={source}
-                  style={styles.screenshot}
-                />
+                <Image source={source} style={styles.screenshot} />
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -34,36 +37,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'black',
-    flex: 1,
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  applyText: {
-    marginTop: 20,
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 24,
-    textAlign: 'center', // Added to center the text horizontally
-  },
-  screenshot: {
-    width: 300,
-    height: 250,
-    resizeMode: 'contain',
-  },
-  screenshotsContainer: {
-    width: 300,
-    flexGrow: 0,
-    maxHeight: 250,
-    marginTop: 50,
-    overflow: 'scroll',
-    flexDirection: 'column',
-    alignItems: 'center', // Added to center child elements horizontally
-  },
-});
