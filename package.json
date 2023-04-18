@@ -1,7 +1,7 @@
 {
   "name": "car-lights",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -11,13 +11,15 @@
   },
   "dependencies": {
     "expo": "~48.0.10",
+    "expo-dev-client": "~2.2.1",
     "expo-status-bar": "~1.4.4",
     "expo-updates": "~0.16.4",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "0.71.6",
-    "react-native-web": "~0.18.11",
-    "expo-dev-client": "~2.2.1"
+    "react-native-ble-manager": "^10.0.2",
+    "react-native-ble-plx": "^2.0.3",
+    "react-native-web": "~0.18.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
