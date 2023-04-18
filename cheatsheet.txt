@@ -1,0 +1,2 @@
+eas build --profile development --platform ios --local
+car-lights % npx expo start --dev-client

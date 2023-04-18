@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "car-lights",
+    "owner": "exl",
     "slug": "car-lights",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.exl.carlights"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +30,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "4408F1A6-0F3F-4D7F-8F7E-1B3C6DE02D94"
+        "projectId": "a49b9cc4-d917-43aa-8d77-dd89539388c4"
       }
     }
   }
