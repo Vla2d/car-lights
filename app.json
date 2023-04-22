@@ -19,14 +19,34 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.exl.carlights",
       "infoPlist": {
-        "NSBluetoothAlwaysUsageDescription": "Allow the app to access Bluetooth"
+        "NSBluetoothAlwaysUsageDescription": "Allow the app to access Bluetooth",
+        "NSBluetoothPeripheralUsageDescription": "Allow the app to access Bluetooth"
       }
     },
+    "plugins": [
+      [
+        "@config-plugins/react-native-ble-plx",
+        {
+          "isBackgroundEnabled": true,
+          "modes": [
+            "peripheral",
+            "central"
+          ],
+          "bluetoothAlwaysPermission": "Allow us to connect to bluetooth devices"
+        }
+      ]
+    ],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/expo/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
+      ],
+      "package": "com.exl.carlights"
     },
     "web": {
       "favicon": "./assets/expo/favicon.png"
