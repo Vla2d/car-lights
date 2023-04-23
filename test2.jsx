@@ -7,7 +7,7 @@ const ScanScreen = () => {
     const BluetoothManager = new BleManager();
 
     const startScan = async () => {
-        console.log('start scan');
+        console.log('start scanning');
         let dev;
         BluetoothManager.startDeviceScan(null, null, (error, device) => {
             if (error) {
@@ -19,7 +19,6 @@ const ScanScreen = () => {
                 // console.log(device)
                 dev = device;
                 BluetoothManager.stopDeviceScan();
-
             }
         });
 
@@ -27,14 +26,14 @@ const ScanScreen = () => {
             await BluetoothManager.connectToDevice(dev.id)
             const serviceUUID = '0000ffe0'//-0000-1000-8000-00805f9b34fb';
             const characteristicUUID = '0000ffe1'//-0000-1000-8000-00805f9b34fb';
-            const services1 = await dev.discoverAllServicesAndCharacteristics();
+            const services = await dev.discoverAllServicesAndCharacteristics();
 
             BluetoothManager.monitorCharacteristicForDevice(dev.id, serviceUUID, characteristicUUID, (err, char) => {
                 if (err) {
-                    console.error(err)
+                    //console.error(err)
                 }
 
-                console.log(char)
+                if (char !== null) console.log(char)
             })
 
             await BluetoothManager.writeCharacteristicWithoutResponseForDevice(
@@ -43,49 +42,28 @@ const ScanScreen = () => {
                 characteristicUUID,
                 "dGVzdA=="
             )
-
-
-            // const services = await dev.services();
-            // const serviceUUID1 = services.map(service => service.uuid)[0]
-
-            // const characteristics = await dev.characteristicsForService(serviceUUID1);
-            // console.log(serviceUUID1, characteristics)
         }, 1000);
 
         setTimeout(async () => {
-            await dev.cancelConnection();
-            console.log('disc');
-        }, 5000);
+            const serviceUUID = '0000ffe0'//-0000-1000-8000-00805f9b34fb';
+            const characteristicUUID = '0000ffe1'//-0000-1000-8000-00805f9b34fb';
+            const services = await dev.discoverAllServicesAndCharacteristics();
+            //console.log(services)
+
+            const services1 = await BluetoothManager.readCharacteristicForDevice(dev.id, serviceUUID, characteristicUUID)
+            console.log('new value is:', services1.value)
+        }, 3000);
+
         setTimeout(async () => {
-            let dev;
-            BluetoothManager.startDeviceScan(null, null, (error, device) => {
-                if (error) {
-                    console.error(error);
-                    return;
-                }
-
-                if (device?.name?.includes('HMSoft')) {
-                    // console.log(device)
-                    dev = device;
-                    BluetoothManager.stopDeviceScan();
-
-                }
-            });
-            console.log('con2')
-            await BluetoothManager.connectToDevice(dev.id)
-
-
-            // await dev.cancelConnection();
-            // console.log('disc2');
-            const res = await BluetoothManager.readCharacteristicForDevice(dev.id, '0000ffe0', '0000ffe1');
-            await console.log(res.value);
-        }, 10000)
+            await dev.cancelConnection();
+            console.log('disconnected');
+        }, 5000);
     };
 
     return (
         <View style={{ flex: 1, padding: 20 }}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Button title="Start Scanning" onPress={startScan} />
+                <Button title="Start Scanning" onPress={async () => await startScan()} />
             </View>
         </View>
     );
@@ -93,3 +71,4 @@ const ScanScreen = () => {
 
 
 export default ScanScreen;
+
