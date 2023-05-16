@@ -3,7 +3,7 @@ import {
   ScrollView, Image, View, TouchableOpacity, Text, StatusBar,
 } from 'react-native';
 import styles from './StyleSheet.jsx';
-import images from './images.js';
+import images from '../images.js';
 
 export default function App() {
   const [selectedImageId, setSelectedImageId] = useState(null);

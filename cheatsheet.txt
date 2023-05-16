@@ -2,3 +2,5 @@ eas build --profile development --platform ios --local
 npx expo start --dev-client
 
 npx expo start --dev-client --tunnel
+
+npx eslint . --fix

@@ -1,5 +1,5 @@
 import registerRootComponent from 'expo/build/launch/registerRootComponent';
 
-import App from './test2.jsx'
+import App from './components/App';
 
-registerRootComponent(App)
+registerRootComponent(App);
