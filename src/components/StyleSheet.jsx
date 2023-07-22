@@ -19,17 +19,27 @@ const styles = StyleSheet.create({
     },
     screenshot: {
         width: 300,
-        height: 250,
+        height: 150,
         resizeMode: 'contain',
     },
     screenshotsContainer: {
+        marginTop: 20,
         width: 300,
         flexGrow: 0,
-        maxHeight: 250,
-        marginTop: 50,
+        maxHeight: 150,
         overflow: 'scroll',
         flexDirection: 'column',
         alignItems: 'center', // Added to center child elements horizontally
+    },
+    logoContainer: {
+        maxHeight: 200,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    logo: {
+        width: 300,
+        height: 250,
+        resizeMode: 'contain',
     },
 });
 

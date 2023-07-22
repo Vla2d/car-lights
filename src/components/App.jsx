@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import styles from './StyleSheet.jsx';
 import images from '../images.js';
+import logo from '../../assets/exlLogo.png'
 
 export default function App() {
   const [selectedImageId, setSelectedImageId] = useState(null);
@@ -14,6 +15,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image source={logo} style={styles.logo} />
+      </View>
       <View style={styles.scrollContainer}>
         <View style={styles.screenshotsContainer}>
           <ScrollView
