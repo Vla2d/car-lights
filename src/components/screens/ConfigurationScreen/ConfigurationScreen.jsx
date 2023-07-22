@@ -1,7 +1,6 @@
 // ConfigurationScreen.jsx
 import React, { useState } from 'react';
-import { View, Image, ScrollView, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-web';
+import { View, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
 import images from '../../../images.js'
 import logo from '../../../../assets/exlLogo.png';
 import styles from './StyleSheet.jsx';
