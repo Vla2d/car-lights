@@ -1,43 +1,30 @@
-import React, { useState } from 'react';
-import {
-  ScrollView, Image, View, TouchableOpacity, Text, StatusBar,
-} from 'react-native';
-import styles from './StyleSheet.jsx';
-import images from '../images.js';
-import logo from '../../assets/exlLogo.png'
+import React from 'react';
+import { View } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Footer from './Footer/Footer.jsx';
+import ConfigurationScreen from './screens/ConfigurationScreen/ConfigurationScreen.jsx';
+import ShowModeScreen from './screens/ShowModeScreen/ShowModeScreen.jsx';
+import SettingsScreen from './screens/SettingsScreen/SettingsScreen.jsx';
 
-export default function App() {
-  const [selectedImageId, setSelectedImageId] = useState(null);
+const Stack = createNativeStackNavigator();
 
-  const handleImagePress = (index) => {
-    setSelectedImageId(index);
-  };
-
+const App = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo} />
-      </View>
-      <View style={styles.scrollContainer}>
-        <View style={styles.screenshotsContainer}>
-          <ScrollView
-            indicatorStyle="white"
-            contentContainerStyle={styles.scrollContainer}
-            scrollEnabled={true}
-            removeClippedSubviews={true}
-            pagingEnabled={true}
-          >
-            {images.map((source, index) => (
-              <TouchableOpacity key={index} onPress={() => handleImagePress(index)}>
-                <Image source={source} style={styles.screenshot} />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-        <Text style={styles.applyText}>In order to apply your selected style, just click the image.</Text>
-        <Text style={styles.applyText}>Current style id: {selectedImageId}</Text>
-      </View>
-      <StatusBar hidden={false} backgroundColor="black" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="ConfigurationScreen"
+        screenOptions={{
+          headerShown: false, // Hide the header
+        }}
+      >
+        <Stack.Screen name="ConfigurationScreen" component={ConfigurationScreen} />
+        <Stack.Screen name="ShowModeScreen" component={ShowModeScreen} />
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+      </Stack.Navigator>
+      <Footer />
+    </NavigationContainer>
   );
-}
+};
+
+export default App;
