@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { deactivateKeepAwake } from 'expo-keep-awake'
 import { View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,6 +11,10 @@ import SettingsScreen from './screens/SettingsScreen/SettingsScreen.jsx';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  useEffect(() => {
+    deactivateKeepAwake();
+  }) // по идее работает только в dev environment, но нужно проверить в продакшн
+
   return (
     <NavigationContainer>
       <Stack.Navigator
